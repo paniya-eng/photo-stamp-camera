@@ -3,7 +3,7 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:   # امکان اجرای دستی
+  workflow_dispatch:
 
 jobs:
   build:
@@ -28,6 +28,9 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Accept Android licenses
+        run: yes | flutter doctor --android-licenses || true
 
       - name: Build APK
         run: flutter build apk --release
